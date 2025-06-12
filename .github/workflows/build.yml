@@ -40,7 +40,7 @@ jobs:
         path: ./build/linux/x64/${{ matrix.mode }}/main
   run:
     needs: [build]
-    runs-on: ${{ meeds.build.outputs.matrix-os }}
+    runs-on: ${{ needs.build.outputs.matrix-os }}
     steps:
       - uses: actions/download-artifact@v3
         with:
