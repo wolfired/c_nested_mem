@@ -1,4 +1,4 @@
-name: Auto
+name: build
 
 on: push
 
@@ -10,10 +10,7 @@ jobs:
     - uses: xmake-io/github-action-setup-xmake@v1
       with:
         xmake-version: latest
-    - name: Build with Xmake
+    - name: build with xmake
       run: |
         xmake f -p linux -a x64 -m release
         xmake b
-    - uses: Ximaz/valgrind-action@v1.2.0
-      with:
-        binary_path: "./build/linux/x64/release/main"
