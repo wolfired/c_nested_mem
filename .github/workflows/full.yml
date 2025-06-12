@@ -1,0 +1,54 @@
+name: full
+
+on: push
+
+jobs:
+  full:
+    strategy:
+      matrix:
+        os: [windows-latest, ubuntu-latest]
+        mode: [debug, release]
+
+    runs-on: ${{ matrix.os }}
+
+    steps:
+    - uses: actions/checkout@v4
+      
+    - name: msvc if windows
+      if: matrix.os == 'windows-latest'
+      uses: TheMrMilchmann/setup-msvc-dev@v3.0.1
+      with:
+        arch: x64
+
+    - uses: xmake-io/github-action-setup-xmake@v1
+      with:
+        xmake-version: latest
+
+    - name: build if windows
+      if: matrix.os == 'windows-latest'
+      run: |
+        xmake f -p windows -a x64 -m ${{ matrix.mode }} --cflags='-DOS=${{ matrix.os }} -DMO=${{ matrix.mode }}'
+        xmake b -a
+
+    - name: build if linux
+      if: matrix.os == 'ubuntu-latest'
+      run: |
+        xmake f -p linux -a x64 -m ${{ matrix.mode }} --cflags='-DOS=${{ matrix.os }} -DMO=${{ matrix.mode }}'
+        xmake b -a
+
+    - name: run if windows
+      if: matrix.os == 'windows-latest'
+      run: |
+        .\build\windows\x64\${{ matrix.mode }}\main.exe
+
+    - name: run if linux
+      if: matrix.os == 'ubuntu-latest'
+      run: |
+        chmod 744 ./build/linux/x64/${{ matrix.mode }}/main
+        ./build/linux/x64/${{ matrix.mode }}/main
+
+    - name: valgrind if linux
+      if: needs.build.outputs.matrix-os == 'ubuntu-latest'
+      uses: Ximaz/valgrind-action@v1.2.0
+      with:
+        binary_path: ./build/linux/x64/${{ matrix.mode }}/main
