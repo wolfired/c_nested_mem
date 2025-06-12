@@ -19,4 +19,4 @@ jobs:
         ls ${{ env.GITHUB_WORKSPACE }}/build/linux
     - uses: Ximaz/valgrind-action@v1.2.0
       with:
-        binary_path: ${{ env.GITHUB_WORKSPACE }}/build/linux/x64/release/main
+        binary_path: ${{ github.GITHUB_ACTION_PATH }}/build/linux/x64/release/main
