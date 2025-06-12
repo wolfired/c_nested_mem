@@ -7,8 +7,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
-    - uses: xmake-io/xmake-action@v1
+    - uses: xmake-io/github-action-setup-xmake@v1
       with:
-        version: latest
+        xmake-version: latest
     - name: Build with Xmake
       run: xmake
