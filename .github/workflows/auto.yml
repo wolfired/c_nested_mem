@@ -14,6 +14,7 @@ jobs:
       run: |
         xmake f -p linux -a x64 -m release
         xmake b
+        pwd
         ls ${{ github.GITHUB_ACTION_PATH }}
         ls ${{ github.GITHUB_ACTION_PATH }}/build
         ls ${{ github.GITHUB_ACTION_PATH }}/build/linux
