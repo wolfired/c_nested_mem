@@ -21,7 +21,7 @@ int main(int argc, char const* argv[]) {
     sun_make(&s2, 8);
     // sun_free(&s2);
 
-    printf("hello world!\n%s\n%s", TOSTRING(OS), TOSTRING(MO));
+    printf("hello world!\n%s\n%s\n", TOSTRING(OS), TOSTRING(MO));
 
     return EXIT_SUCCESS;
 }
