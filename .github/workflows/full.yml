@@ -51,4 +51,4 @@ jobs:
       if: matrix.os == 'ubuntu-latest' && matrix.mode == 'debug'
       uses: Ximaz/valgrind-action@v1.2.0
       with:
-        binary_path: ./build/linux/x64/${{ matrix.mode }}/main
+        binary_path: "./build/linux/x64/${{ matrix.mode }}/main"
