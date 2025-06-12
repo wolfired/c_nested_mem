@@ -3,7 +3,7 @@ name: full
 on: push
 
 jobs:
-  full:
+  build_and_run:
     strategy:
       matrix:
         os: [windows-latest, ubuntu-latest]
@@ -47,8 +47,21 @@ jobs:
       run: |
         ./build/linux/x64/${{ matrix.mode }}/main
 
-    - name: valgrind if linux & debug
-      if: matrix.os == 'ubuntu-latest' && matrix.mode == 'debug'
-      uses: Ximaz/valgrind-action@v1.2.0
+  valgrind:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+
+    - uses: xmake-io/github-action-setup-xmake@v1
       with:
-        binary_path: "./build/linux/x64/${{ matrix.mode }}/main"
+        xmake-version: latest
+
+    - name: build
+      run: |
+        xmake f -p linux -a x64 -m debug --cflags='-DOS=ubuntu-latest -DMO=debug'
+        xmake b -a
+        chmod -R 777 ./build
+
+    - uses: Ximaz/valgrind-action@v1.2.0
+      with:
+        binary_path: "./build/linux/x64/debug/main"
