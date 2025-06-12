@@ -3,6 +3,9 @@
 
 #include "sun.h"
 
+#define STRINGIFY(x) #x
+#define TOSTRING(x) STRINGIFY(x)
+
 int main(int argc, char const* argv[]) {
     // for stack obj
     Sun s0;
@@ -18,7 +21,7 @@ int main(int argc, char const* argv[]) {
     sun_make(&s2, 8);
     sun_free(&s2);
 
-    printf("hello world!\n");
+    printf("hello world!\n%s\n%s", TOSTRING(OS), TOSTRING(MO));
 
     return EXIT_SUCCESS;
 }

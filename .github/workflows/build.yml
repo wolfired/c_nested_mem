@@ -25,12 +25,12 @@ jobs:
     - name: build if windows
       if: matrix.os == 'windows-latest'
       run: |
-        xmake f -p windows -a x64 -m ${{ matrix.mode }}
+        xmake f -p windows -a x64 -m ${{ matrix.mode }} --cflags='-DOS=${{ matrix.os }} -DMO=${{ matrix.mode }}'
         xmake b -a
     - name: build if linux
       if: matrix.os == 'ubuntu-latest'
       run: |
-        xmake f -p linux -a x64 -m ${{ matrix.mode }}
+        xmake f -p linux -a x64 -m ${{ matrix.mode }} --cflags='-DOS=${{ matrix.os }} -DMO=${{ matrix.mode }}'
         xmake b -a
     - name: upload if windows
       if: matrix.os == 'windows-latest'
@@ -71,7 +71,6 @@ jobs:
           chmod 744 ./main
           ./main
   valgrind:
-    if: needs.build.outputs.matrix-os == 'ubuntu-latest'
     needs: [build]
     strategy:
       matrix:
