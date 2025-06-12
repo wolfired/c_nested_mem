@@ -16,4 +16,4 @@ jobs:
         xmake b
     - uses: Ximaz/valgrind-action@v1.2.0
       with:
-        binary_path: ${{ GITHUB_WORKSPACE }}/build/x64/release/main
+        binary_path: ${{ env.GITHUB_WORKSPACE }}/build/x64/release/main
