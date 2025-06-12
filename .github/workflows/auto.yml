@@ -14,9 +14,9 @@ jobs:
       run: |
         xmake f -p linux -a x64 -m release
         xmake b
-        ls ${{ env.GITHUB_WORKSPACE }}
-        ls ${{ env.GITHUB_WORKSPACE }}/build
-        ls ${{ env.GITHUB_WORKSPACE }}/build/linux
+        ls ${{ github.GITHUB_ACTION_PATH }}
+        ls ${{ github.GITHUB_ACTION_PATH }}/build
+        ls ${{ github.GITHUB_ACTION_PATH }}/build/linux
     - uses: Ximaz/valgrind-action@v1.2.0
       with:
         binary_path: ${{ github.GITHUB_ACTION_PATH }}/build/linux/x64/release/main
