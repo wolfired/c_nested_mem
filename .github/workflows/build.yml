@@ -11,7 +11,7 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     - name: setup msvc
-      if: ${{ matrix.os }} == 'windows-latest'
+      if: matrix.os == 'windows-latest'
       uses: TheMrMilchmann/setup-msvc-dev@v3.0.1
     - uses: xmake-io/github-action-setup-xmake@v1
       with:

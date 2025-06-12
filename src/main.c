@@ -18,5 +18,7 @@ int main(int argc, char const* argv[]) {
     sun_make(&s2, 8);
     sun_free(&s2);
 
+    printf("hello world!\n");
+
     return EXIT_SUCCESS;
 }
