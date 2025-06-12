@@ -22,7 +22,13 @@ jobs:
     - uses: xmake-io/github-action-setup-xmake@v1
       with:
         xmake-version: latest
-    - name: build with xmake
+    - name: build if windows
+      if: matrix.os == 'windows-latest'
+      run: |
+        xmake f -p windows -a x64 -m ${{ matrix.mode }}
+        xmake b -a
+    - name: build if windows
+      if: matrix.os == 'ubuntu-latest'
       run: |
         xmake f -p linux -a x64 -m ${{ matrix.mode }}
         xmake b -a
