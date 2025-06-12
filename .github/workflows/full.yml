@@ -47,8 +47,8 @@ jobs:
         chmod 744 ./build/linux/x64/${{ matrix.mode }}/main
         ./build/linux/x64/${{ matrix.mode }}/main
 
-    - name: valgrind if linux
-      if: needs.build.outputs.matrix-os == 'ubuntu-latest'
+    - name: valgrind if linux & debug
+      if: matrix.os == 'ubuntu-latest' && matrix.mode == 'debug'
       uses: Ximaz/valgrind-action@v1.2.0
       with:
         binary_path: ./build/linux/x64/${{ matrix.mode }}/main
