@@ -28,13 +28,13 @@ jobs:
         xmake b -a
     - name: upload if windows
       if: matrix.os == 'windows-latest'
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: main.exe
         path: ./build/windows/x64/${{ matrix.mode }}/main.exe
     - name: upload if linux
       if: matrix.os == 'ubuntu-latest'
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: main
         path: ./build/linux/x64/${{ matrix.mode }}/main
@@ -42,7 +42,7 @@ jobs:
     needs: [build]
     runs-on: ${{ needs.build.outputs.matrix-os }}
     steps:
-      - uses: actions/download-artifact@v3
+      - uses: actions/download-artifact@v4
         with:
           name: main
       - name: run
