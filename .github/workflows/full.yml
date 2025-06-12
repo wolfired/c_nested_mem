@@ -35,7 +35,7 @@ jobs:
       run: |
         xmake f -p linux -a x64 -m ${{ matrix.mode }} --cflags='-DOS=${{ matrix.os }} -DMO=${{ matrix.mode }}'
         xmake b -a
-        chmod 744 ./build/linux/x64/${{ matrix.mode }}/main
+        chmod -R 777 ./build
 
     - name: run if windows
       if: matrix.os == 'windows-latest'
