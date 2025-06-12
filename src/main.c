@@ -16,7 +16,7 @@ int main(int argc, char const* argv[]) {
 
     Sun* s2 = NULL;
     sun_make(&s2, 8);
-    sun_free(&s2);
+    // sun_free(&s2);
 
     return EXIT_SUCCESS;
 }
