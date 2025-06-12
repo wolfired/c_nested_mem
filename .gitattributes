@@ -1,3 +1,1 @@
-.github/* linguist-vendored
-.vscode/* linguist-vendored
-*.lua linguist-vendored
+*.lua -linguist-detectable
