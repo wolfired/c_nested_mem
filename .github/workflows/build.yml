@@ -46,6 +46,9 @@ jobs:
         path: ./build/linux/x64/${{ matrix.mode }}/main
   run:
     needs: [build]
+    strategy:
+      matrix:
+        build-result: ${{ fromJson(needs.build.outputs.matrix-result) }}
     runs-on: ${{ needs.build.outputs.matrix-os }}
     steps:
       - name: download if windows
@@ -68,6 +71,9 @@ jobs:
           ./main
   valgrind:
     needs: [build]
+    strategy:
+      matrix:
+        build-result: ${{ fromJson(needs.build.outputs.matrix-result) }}
     runs-on: ${{ needs.build.outputs.matrix-os }}
     steps:
       - name: download if linux
