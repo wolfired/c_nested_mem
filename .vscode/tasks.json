@@ -6,11 +6,11 @@
     {
       "label": "build_win",
       "type": "shell",
-      "command": "cl /I.\\src /Zi /MT /D_DEBUG /DUNICODE /D_UNICODE /utf-8 .\\src\\main.c .\\src\\matrix.c",
+      "command": "cl /I.\\src /Zi /MT /D_DEBUG /DUNICODE /D_UNICODE /utf-8 .\\src\\main.c .\\src\\son.c .\\src\\sun.c",
       "options": {
         "shell": {
           "executable": "D:\\Microsoft\\VisualStudio\\2022\\Community\\VC\\Auxiliary\\Build\\vcvarsall.bat",
-          "args": ["x86", "&&"]
+          "args": ["x64", "&&"]
         }
       },
       "problemMatcher": ["$msvc"]
@@ -18,7 +18,7 @@
     {
       "label": "build_linux",
       "type": "shell",
-      "command": "gcc -std=c23 -g -o main -I./src ./src/main.c ./src/matrix.c",
+      "command": "gcc -std=c23 -g -o main -I./src ./src/main.c ./src/son.c ./src/sun.c",
       "problemMatcher": ["$gcc"]
     }
   ]

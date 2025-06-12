@@ -18,7 +18,7 @@
       "name": "(Linux) Launch",
       "type": "cppdbg",
       "request": "launch",
-      "program": "${workspaceRoot}/main",
+      "program": "${workspaceFolder}/build/linux/x64/debug//main",
       "args": [],
       "stopAtEntry": true,
       "cwd": "${fileDirname}",

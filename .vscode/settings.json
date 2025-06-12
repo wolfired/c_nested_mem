@@ -8,7 +8,7 @@
       "args": [
         "/k",
         "D:\\Microsoft\\VisualStudio\\2022\\Community\\VC\\Auxiliary\\Build\\vcvarsall.bat",
-        "x86"
+        "x64"
       ],
       "icon": "terminal-cmd"
     }
