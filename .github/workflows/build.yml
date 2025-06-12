@@ -48,7 +48,8 @@ jobs:
     needs: [build]
     strategy:
       matrix:
-        build-result: ${{ fromJson(needs.build.outputs.matrix-result) }}
+        os: [windows-latest, ubuntu-latest]
+        mode: [debug, release]
     runs-on: ${{ needs.build.outputs.matrix-os }}
     steps:
       - name: download if windows
@@ -70,10 +71,12 @@ jobs:
           chmod 744 ./main
           ./main
   valgrind:
+    if: needs.build.outputs.matrix-os == 'ubuntu-latest'
     needs: [build]
     strategy:
       matrix:
-        build-result: ${{ fromJson(needs.build.outputs.matrix-result) }}
+        os: [windows-latest, ubuntu-latest]
+        mode: [debug, release]
     runs-on: ${{ needs.build.outputs.matrix-os }}
     steps:
       - name: download if linux
