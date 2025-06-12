@@ -27,7 +27,7 @@ jobs:
       run: |
         xmake f -p windows -a x64 -m ${{ matrix.mode }}
         xmake b -a
-    - name: build if windows
+    - name: build if linux
       if: matrix.os == 'ubuntu-latest'
       run: |
         xmake f -p linux -a x64 -m ${{ matrix.mode }}
@@ -36,7 +36,7 @@ jobs:
       if: matrix.os == 'windows-latest'
       uses: actions/upload-artifact@v4
       with:
-        name: main.exe
+        name: main
         path: ./build/windows/x64/${{ matrix.mode }}/main.exe
     - name: upload if linux
       if: matrix.os == 'ubuntu-latest'
