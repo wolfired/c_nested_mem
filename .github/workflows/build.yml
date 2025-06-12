@@ -13,6 +13,8 @@ jobs:
     - name: setup msvc
       if: matrix.os == 'windows-latest'
       uses: TheMrMilchmann/setup-msvc-dev@v3.0.1
+      with:
+        arch: x64
     - uses: xmake-io/github-action-setup-xmake@v1
       with:
         xmake-version: latest
@@ -20,3 +22,4 @@ jobs:
       run: |
         xmake f -p linux -a x64 -m release
         xmake b
+        xmake r
