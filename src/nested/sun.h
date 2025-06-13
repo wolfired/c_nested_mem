@@ -26,3 +26,4 @@ void   sun_make(Sun** inst, size_t cap);
 void   sun_free(Sun** inst);
 
 #endif
+
