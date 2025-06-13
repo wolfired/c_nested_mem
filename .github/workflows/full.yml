@@ -8,6 +8,7 @@ jobs:
       matrix:
         os: [ubuntu-latest]
         mode: [debug]
+        target: [test]
 
     runs-on: ${{ matrix.os }}
 
@@ -22,14 +23,23 @@ jobs:
       if: matrix.os == 'ubuntu-latest'
       run: |
         xmake f -p linux -a x64 -m ${{ matrix.mode }} --cflags='-DOS=${{ matrix.os }} -DMO=${{ matrix.mode }}'
-        xmake b -a
+        xmake b ${{ matrix.target }}
         chmod -R 777 ./build
 
     - name: valgrind if linux && debug
       if: matrix.os == 'ubuntu-latest' && matrix.mode == 'debug'
       uses: Ximaz/valgrind-action@v1.2.0
       with:
-        binary_path: ./build/linux/x64/${{ matrix.mode }}/main
+        binary_path: ./build/linux/x64/${{ matrix.mode }}/${{ matrix.target }}
+    - name: run for codecov
+      if: matrix.os == 'ubuntu-latest' && matrix.mode == 'debug'
+      run: |
+        GCOV_PREFIX=./build/.codecov GCOV_PREFIX_STRIP=64 ./build/linux/x64/${{ matrix.mode }}/${{ matrix.target }}
+    - name: codecov if linux && debug
+      if: matrix.os == 'ubuntu-latest' && matrix.mode == 'debug'
+      uses: codecov/codecov-action@v5
+      with:
+        token: ${{ secrets.CODECOV_TOKEN }}
 
   passed:
     needs: valgrind
@@ -38,6 +48,7 @@ jobs:
       matrix:
         os: [windows-latest, ubuntu-latest]
         mode: [debug, release]
+        target: [main, test]
 
     runs-on: ${{ matrix.os }}
 
@@ -58,21 +69,21 @@ jobs:
       if: matrix.os == 'windows-latest'
       run: |
         xmake f -p windows -a x64 -m ${{ matrix.mode }} --cflags='-DOS=${{ matrix.os }} -DMO=${{ matrix.mode }}'
-        xmake b -a
+        xmake b ${{ matrix.target }}
 
     - name: build if linux
       if: matrix.os == 'ubuntu-latest'
       run: |
         xmake f -p linux -a x64 -m ${{ matrix.mode }} --cflags='-DOS=${{ matrix.os }} -DMO=${{ matrix.mode }}'
-        xmake b -a
+        xmake b ${{ matrix.target }}
         chmod -R 777 ./build
 
     - name: run if windows
       if: matrix.os == 'windows-latest'
       run: |
-        .\build\windows\x64\${{ matrix.mode }}\main.exe
+        .\build\windows\x64\${{ matrix.mode }}\${{ matrix.target }}.exe
 
     - name: run if linux
       if: matrix.os == 'ubuntu-latest'
       run: |
-        ./build/linux/x64/${{ matrix.mode }}/main
+        ./build/linux/x64/${{ matrix.mode }}/${{ matrix.target }}
