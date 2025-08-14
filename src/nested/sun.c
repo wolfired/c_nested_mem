@@ -83,7 +83,7 @@ void sun_create(Sun** pptr, size_t cap) {
     *pptr = sun_new(cap);
 }
 
-void sun_freeete(Sun** pptr) {
+void sun_delete(Sun** pptr) {
     if(NULL == pptr || NULL == *pptr) { return; }
 
     sun_free(*pptr);
