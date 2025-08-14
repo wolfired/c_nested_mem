@@ -2,34 +2,34 @@
 
 #include "son.h"
 
-void son_init(Son* thiz) {
-    assert(NULL != thiz);
+void son_init(Son* ptr) {
+    assert(NULL != ptr);
 
-    thiz->cap = 0;
-    thiz->dat = NULL;
+    ptr->cap = 0;
+    ptr->dat = NULL;
 }
 
-int8_t son_ctor(Son* thiz, size_t cap) {
-    assert(NULL != thiz);
+int8_t son_ctor(Son* ptr, size_t cap) {
+    assert(NULL != ptr);
 
-    if(NULL != thiz->dat) { return -1; }
+    if(NULL != ptr->dat) { return -1; }
 
-    thiz->cap = cap;
+    ptr->cap = cap;
 
-    thiz->dat = (void*)malloc(thiz->cap);
-    if(NULL == thiz->dat) { return -1; }
+    ptr->dat = (void*)malloc(ptr->cap);
+    if(NULL == ptr->dat) { return -1; }
 
     return 0;
 }
 
-void son_dtor(Son* thiz) {
-    if(NULL == thiz) { return; }
+void son_dtor(Son* ptr) {
+    if(NULL == ptr) { return; }
 
-    thiz->cap = 0;
+    ptr->cap = 0;
 
-    if(NULL != thiz->dat) {
-        free(thiz->dat);
-        thiz->dat = NULL;
+    if(NULL != ptr->dat) {
+        free(ptr->dat);
+        ptr->dat = NULL;
     }
 }
 
@@ -48,22 +48,22 @@ Son* son_new(size_t cap) {
     return obj;
 }
 
-void son_free(Son* thiz) {
-    if(NULL == thiz) { return; }
+void son_free(Son* ptr) {
+    if(NULL == ptr) { return; }
 
-    son_dtor(thiz);
-    free(thiz);
+    son_dtor(ptr);
+    free(ptr);
 }
 
-void son_create(Son** inst, size_t cap) {
-    if(NULL == inst || NULL != *inst) { return; }
+void son_create(Son** pptr, size_t cap) {
+    if(NULL == pptr || NULL != *pptr) { return; }
 
-    *inst = son_new(cap);
+    *pptr = son_new(cap);
 }
 
-void son_delete(Son** inst) {
-    if(NULL == inst || NULL == *inst) { return; }
+void son_delete(Son** pptr) {
+    if(NULL == pptr || NULL == *pptr) { return; }
 
-    son_free(*inst);
-    *inst = NULL;
+    son_free(*pptr);
+    *pptr = NULL;
 }

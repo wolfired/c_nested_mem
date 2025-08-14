@@ -2,57 +2,57 @@
 
 #include "sun.h"
 
-void sun_init(Sun* inst) {
-    assert(NULL != inst);
+void sun_init(Sun* ptr) {
+    assert(NULL != ptr);
 
-    inst->cap = 0;
-    inst->dat = NULL;
-    inst->raw = NULL;
-    son_init(&inst->son);
-    inst->son_ptr = NULL;
+    ptr->cap = 0;
+    ptr->dat = NULL;
+    ptr->raw = NULL;
+    son_init(&ptr->son);
+    ptr->son_ptr = NULL;
 }
 
-int8_t sun_ctor(Sun* inst, size_t cap) {
-    assert(NULL != inst);
+int8_t sun_ctor(Sun* ptr, size_t cap) {
+    assert(NULL != ptr);
 
-    if(NULL != inst->dat) { return -1; }
-    if(NULL != inst->raw) { return -1; }
-    if(NULL != inst->son_ptr) { return -1; }
+    if(NULL != ptr->dat) { return -1; }
+    if(NULL != ptr->raw) { return -1; }
+    if(NULL != ptr->son_ptr) { return -1; }
 
-    inst->cap = cap;
+    ptr->cap = cap;
 
-    inst->dat = (void*)malloc(inst->cap);
-    if(NULL == inst->dat) { return -1; }
+    ptr->dat = (void*)malloc(ptr->cap);
+    if(NULL == ptr->dat) { return -1; }
 
-    inst->raw = (void*)malloc(inst->cap);
-    if(NULL == inst->raw) { return -1; }
+    ptr->raw = (void*)malloc(ptr->cap);
+    if(NULL == ptr->raw) { return -1; }
 
-    if(0 != son_ctor(&inst->son, inst->cap)) { return -1; }
+    if(0 != son_ctor(&ptr->son, ptr->cap)) { return -1; }
 
-    son_create(&inst->son_ptr, inst->cap);
-    if(NULL == inst->son_ptr) { return -1; }
+    son_create(&ptr->son_ptr, ptr->cap);
+    if(NULL == ptr->son_ptr) { return -1; }
 
     return 0;
 }
 
-void sun_dtor(Sun* inst) {
-    if(NULL == inst) { return; }
+void sun_dtor(Sun* ptr) {
+    if(NULL == ptr) { return; }
 
-    inst->cap = 0;
+    ptr->cap = 0;
 
-    if(NULL != inst->dat) {
-        free(inst->dat);
-        inst->dat = NULL;
+    if(NULL != ptr->dat) {
+        free(ptr->dat);
+        ptr->dat = NULL;
     }
 
-    if(NULL != inst->raw) {
-        free(inst->raw);
-        inst->raw = NULL;
+    if(NULL != ptr->raw) {
+        free(ptr->raw);
+        ptr->raw = NULL;
     }
 
-    son_dtor(&inst->son);
+    son_dtor(&ptr->son);
 
-    son_delete(&inst->son_ptr);
+    son_delete(&ptr->son_ptr);
 }
 
 Sun* sun_new(size_t cap) {
@@ -70,22 +70,22 @@ Sun* sun_new(size_t cap) {
     return obj;
 }
 
-void sun_free(Sun* inst) {
-    if(NULL == inst) { return; }
+void sun_free(Sun* ptr) {
+    if(NULL == ptr) { return; }
 
-    sun_dtor(inst);
-    free(inst);
+    sun_dtor(ptr);
+    free(ptr);
 }
 
-void sun_create(Sun** pinst, size_t cap) {
-    if(NULL == pinst || NULL != *pinst) { return; }
+void sun_create(Sun** pptr, size_t cap) {
+    if(NULL == pptr || NULL != *pptr) { return; }
 
-    *pinst = sun_new(cap);
+    *pptr = sun_new(cap);
 }
 
-void sun_freeete(Sun** pinst) {
-    if(NULL == pinst || NULL == *pinst) { return; }
+void sun_freeete(Sun** pptr) {
+    if(NULL == pptr || NULL == *pptr) { return; }
 
-    sun_free(*pinst);
-    *pinst = NULL;
+    sun_free(*pptr);
+    *pptr = NULL;
 }
