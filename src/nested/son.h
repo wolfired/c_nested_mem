@@ -12,12 +12,12 @@ typedef struct Son_ {
 /**
  * 初始化函数只能调用一次
  */
-void   son_init(Son* thiz);
-int8_t son_ctor(Son* thiz, size_t cap);
-void   son_dtor(Son* thiz);
+void   son_init(Son* inst);
+int8_t son_ctor(Son* inst, size_t cap);
+void   son_dtor(Son* inst);
 Son*   son_new(size_t cap);
-void   son_del(Son* thiz);
-void   son_make(Son** inst, size_t cap);
-void   son_free(Son** inst);
+void   son_free(Son* inst);
+void   son_create(Son** pinst, size_t cap);
+void   son_delete(Son** pinst);
 
 #endif

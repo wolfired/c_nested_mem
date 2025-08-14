@@ -48,22 +48,22 @@ Son* son_new(size_t cap) {
     return obj;
 }
 
-void son_del(Son* thiz) {
+void son_free(Son* thiz) {
     if(NULL == thiz) { return; }
 
     son_dtor(thiz);
     free(thiz);
 }
 
-void son_make(Son** inst, size_t cap) {
+void son_create(Son** inst, size_t cap) {
     if(NULL == inst || NULL != *inst) { return; }
 
     *inst = son_new(cap);
 }
 
-void son_free(Son** inst) {
+void son_delete(Son** inst) {
     if(NULL == inst || NULL == *inst) { return; }
 
-    son_del(*inst);
+    son_free(*inst);
     *inst = NULL;
 }
