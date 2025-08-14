@@ -37,21 +37,21 @@ void test_heap_obj() {
         assert(NULL != s1->son.dat);
         assert(NULL != s1->son_ptr);
 
-        sun_free(&s1);
+        sun_delete(&s1);
 
         assert(NULL == s1);
     }
 
     {
         Sun* s2 = NULL;
-        sun_make(&s2, 8);
+        sun_create(&s2, 8);
 
         assert(NULL != s2->dat);
         assert(NULL != s2->raw);
         assert(NULL != s2->son.dat);
         assert(NULL != s2->son_ptr);
 
-        sun_free(&s2);
+        sun_delete(&s2);
 
         assert(NULL == s2);
     }
