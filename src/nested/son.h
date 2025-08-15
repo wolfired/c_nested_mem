@@ -15,9 +15,9 @@ typedef struct Son_ {
 void   son_init(Son* ptr);
 int8_t son_ctor(Son* ptr, size_t cap);
 void   son_dtor(Son* ptr);
-Son*   son_new(size_t cap);
-void   son_free(Son* ptr);
-void   son_create(Son** pptr, size_t cap);
-void   son_delete(Son** pptr);
+Son*   son_new_ptr(size_t cap);
+void   son_free_ptr(Son* ptr);
+void   son_new_pptr(Son** pptr, size_t cap);
+void   son_free_pptr(Son** pptr);
 
 #endif

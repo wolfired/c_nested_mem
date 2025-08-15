@@ -20,10 +20,10 @@ typedef struct Sun_ {
 void   sun_init(Sun* ptr);
 int8_t sun_ctor(Sun* ptr, size_t cap);
 void   sun_dtor(Sun* ptr);
-Sun*   sun_new(size_t cap);
-void   sun_free(Sun* ptr);
-void   sun_create(Sun** pptr, size_t cap);
-void   sun_delete(Sun** pptr);
+Sun*   sun_new_ptr(size_t cap);
+void   sun_free_ptr(Sun* ptr);
+void   sun_new_pptr(Sun** pptr, size_t cap);
+void   sun_free_pptr(Sun** pptr);
 
 #endif
 

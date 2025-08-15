@@ -29,7 +29,7 @@ int8_t sun_ctor(Sun* ptr, size_t cap) {
 
     if(0 != son_ctor(&ptr->son, ptr->cap)) { return -1; }
 
-    son_create(&ptr->son_ptr, ptr->cap);
+    son_new_pptr(&ptr->son_ptr, ptr->cap);
     if(NULL == ptr->son_ptr) { return -1; }
 
     return 0;
@@ -52,7 +52,7 @@ void sun_dtor(Sun* ptr) {
 
     son_dtor(&ptr->son);
 
-    son_delete(&ptr->son_ptr);
+    son_free_pptr(&ptr->son_ptr);
 }
 
 Sun* sun_new(size_t cap) {
