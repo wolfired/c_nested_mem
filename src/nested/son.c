@@ -33,7 +33,7 @@ void son_dtor(Son* ptr) {
     }
 }
 
-Son* son_new(size_t cap) {
+Son* son_new_ptr(size_t cap) {
     Son* obj = (Son*)malloc(sizeof(Son));
     if(NULL == obj) { return NULL; }
 
@@ -48,22 +48,22 @@ Son* son_new(size_t cap) {
     return obj;
 }
 
-void son_free(Son* ptr) {
+void son_free_ptr(Son* ptr) {
     if(NULL == ptr) { return; }
 
     son_dtor(ptr);
     free(ptr);
 }
 
-void son_create(Son** pptr, size_t cap) {
+void son_new_pptr(Son** pptr, size_t cap) {
     if(NULL == pptr || NULL != *pptr) { return; }
 
-    *pptr = son_new(cap);
+    *pptr = son_new_ptr(cap);
 }
 
-void son_delete(Son** pptr) {
+void son_free_pptr(Son** pptr) {
     if(NULL == pptr || NULL == *pptr) { return; }
 
-    son_free(*pptr);
+    son_free_ptr(*pptr);
     *pptr = NULL;
 }

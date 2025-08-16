@@ -15,10 +15,10 @@ target("nested")
     end)
     after_build(function (target)
         if is_plat("linux") then
-            os.exec("mkdir -p $(buildir)/.codecov")
+            os.exec("mkdir -p $(builddir)/.codecov")
             for _, obj in ipairs(target:objectfiles()) do
-                os.cp(obj, "$(buildir)/.codecov")
-                os.cp(path.join(path.directory(obj), path.basename(obj)) .. ".gcno", "$(buildir)/.codecov")
+                os.cp(obj, "$(builddir)/.codecov")
+                os.cp(path.join(path.directory(obj), path.basename(obj)) .. ".gcno", "$(builddir)/.codecov")
                 
             end
         end
@@ -40,10 +40,10 @@ target("test")
     end)
     after_build(function (target)
         if is_plat("linux") then
-            os.exec("mkdir -p $(buildir)/.codecov")
+            os.exec("mkdir -p $(builddir)/.codecov")
             for _, obj in ipairs(target:objectfiles()) do
-                os.cp(obj, "$(buildir)/.codecov")
-                os.cp(path.join(path.directory(obj), path.basename(obj)) .. ".gcno", "$(buildir)/.codecov")
+                os.cp(obj, "$(builddir)/.codecov")
+                os.cp(path.join(path.directory(obj), path.basename(obj)) .. ".gcno", "$(builddir)/.codecov")
             end
         end
     end)

@@ -55,7 +55,7 @@ void sun_dtor(Sun* ptr) {
     son_free_pptr(&ptr->son_ptr);
 }
 
-Sun* sun_new(size_t cap) {
+Sun* sun_new_ptr(size_t cap) {
     Sun* obj = (Sun*)malloc(sizeof(Sun));
     if(NULL == obj) { return NULL; }
 
@@ -70,22 +70,22 @@ Sun* sun_new(size_t cap) {
     return obj;
 }
 
-void sun_free(Sun* ptr) {
+void sun_free_ptr(Sun* ptr) {
     if(NULL == ptr) { return; }
 
     sun_dtor(ptr);
     free(ptr);
 }
 
-void sun_create(Sun** pptr, size_t cap) {
+void sun_new_pptr(Sun** pptr, size_t cap) {
     if(NULL == pptr || NULL != *pptr) { return; }
 
-    *pptr = sun_new(cap);
+    *pptr = sun_new_ptr(cap);
 }
 
-void sun_delete(Sun** pptr) {
+void sun_free_pptr(Sun** pptr) {
     if(NULL == pptr || NULL == *pptr) { return; }
 
-    sun_free(*pptr);
+    sun_free_ptr(*pptr);
     *pptr = NULL;
 }
